@@ -1,0 +1,14 @@
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant-ragestagio
+    restart: unless-stopped
+    ports:
+      - "2222:6333"
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    environment:
+      - QDRANT__SERVICE__GRPC_PORT=6334
+
+volumes:
+  qdrant_storage:
