@@ -22,7 +22,8 @@ from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
 
 
-load_dotenv()
+# Carrega o .env da raiz do repositório, independente do diretório de execução.
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 QDRANT_URL = os.getenv("QDRANT_URL", "http://146.235.55.187:2222")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY") or None

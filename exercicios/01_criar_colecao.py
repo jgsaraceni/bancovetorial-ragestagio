@@ -6,13 +6,15 @@ coleção no Qdrant com a mesma dimensão do modelo de embeddings.
 """
 
 import os
+from pathlib import Path
 
 from dotenv import load_dotenv
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams
 
 
-load_dotenv()
+# Carrega o .env da raiz do repositório, independente do diretório de execução.
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 # Endereço do Qdrant publicado na porta 2222 da máquina OCI.
 QDRANT_URL = os.getenv("QDRANT_URL", "http://146.235.55.187:2222")
