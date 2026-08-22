@@ -15,6 +15,7 @@ quantidade total de chunks (experimento 5 da disciplina).
 
 import os
 from pathlib import Path
+from uuid import NAMESPACE_URL, uuid5
 
 from dotenv import load_dotenv
 from pypdf import PdfReader
@@ -29,8 +30,8 @@ QDRANT_URL = os.getenv("QDRANT_URL", "http://146.235.55.187:2222")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY") or None
 COLECAO = os.getenv("COLECAO", "documentos-ragestagio")
 
-# Pasta onde ficam os PDFs da disciplina.
-PASTA_DOCUMENTOS = Path("data/documentos")
+# Pasta onde ficam os PDFs da disciplina (relativa à raiz do repositório).
+PASTA_DOCUMENTOS = Path(__file__).resolve().parent.parent / "data/documentos"
 
 # Tamanho (caracteres) e sobreposição de cada chunk.
 TAMANHO_CHUNK = 800
@@ -120,7 +121,10 @@ def main() -> None:
                 )
                 pontos.append(
                     {
-                        "id": identificador,
+                        # O Qdrant exige ID como inteiro sem sinal ou UUID.
+                        # uuid5 gera um UUID determinístico a partir da string,
+                        # garantindo que o mesmo chunk sempre tenha o mesmo ID.
+                        "id": str(uuid5(NAMESPACE_URL, identificador)),
                         "texto": chunk,
                         "fonte": pagina["fonte"],
                         "pagina": pagina["pagina"],
