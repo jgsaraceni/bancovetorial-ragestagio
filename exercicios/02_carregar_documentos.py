@@ -24,7 +24,7 @@ from sentence_transformers import SentenceTransformer
 
 load_dotenv()
 
-QDRANT_URL = os.getenv("QDRANT_URL", "http://localhost:2222")
+QDRANT_URL = os.getenv("QDRANT_URL", "http://146.235.55.187:2222")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY") or None
 COLECAO = os.getenv("COLECAO", "documentos-ragestagio")
 
