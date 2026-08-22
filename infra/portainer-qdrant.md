@@ -32,7 +32,14 @@ A forma mais simples é criar um **Stack** no Portainer a partir do
    (e a branch, se necessário, ex.: `main`).
 5. Deixe **Repository path** **vazio**.
    O Portainer vai ler o arquivo `docker-compose.yml` na raiz do repositório.
-6. Clique em **Deploy the stack**.
+6. Na seção **Environment variables**, adicione:
+   - **Name:** `QDRANT_API_KEY`
+   - **Value:** a chave secreta que você mesmo definir (não vai para o git).
+7. Clique em **Deploy the stack**.
+
+> O arquivo `docker-compose.yml` usa `${QDRANT_API_KEY:?...}` — se a
+> variável não for definida no Portainer, o deploy falha de propósito,
+> garantindo que a chave exista.
 
 ### Colando o conteúdo manualmente
 
@@ -52,13 +59,16 @@ services:
     volumes:
       - qdrant_storage:/qdrant/storage
     environment:
+      - QDRANT__SERVICE__API_KEY=${QDRANT_API_KEY:?Defina a variável QDRANT_API_KEY no ambiente da stack}
       - QDRANT__SERVICE__GRPC_PORT=6334
 
 volumes:
   qdrant_storage:
 ```
 
-5. Clique em **Deploy the stack**.
+5. Na seção **Environment variables**, adicione `QDRANT_API_KEY` com o
+   valor secreto que você definir.
+6. Clique em **Deploy the stack**.
 
 ---
 
@@ -112,4 +122,5 @@ Deve responder algo como:
 - **Porta interna (dentro do container):** `6333`
 - **gRPC (opcional):** `6334`
 - **Persistência:** volume Docker `qdrant_storage`
-- **Conexão nos exercícios:** `QDRANT_URL` no arquivo `.env`
+- **Autenticação:** obrigatória via `api-key` (variável `QDRANT_API_KEY` da stack)
+- **Conexão nos exercícios:** `QDRANT_URL` e `QDRANT_API_KEY` no arquivo `.env`
