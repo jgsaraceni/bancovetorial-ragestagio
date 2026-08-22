@@ -17,17 +17,17 @@ bancovetorial-ragestagio/
 ├── .env.example
 ├── .gitignore
 ├── requirements.txt
+├── docker-compose.yml              # Composição do Qdrant (porta 2222) — usada pelo Portainer
 ├── infra/
-│   ├── portainer-qdrant.md        # Passo a passo: criar o container no Portainer (OCI)
-│   ├── docker-compose.yml         # Composição do Qdrant (porta 2222)
-│   └── firewall-oci.md            # Liberar a porta 2222 na OCI
+│   ├── portainer-qdrant.md         # Passo a passo: criar o container no Portainer (OCI)
+│   └── firewall-oci.md             # Liberar a porta 2222 na OCI
 ├── data/
-│   └── documentos/                # PDFs usados nos exercícios
+│   └── documentos/                 # PDFs usados nos exercícios
 └── exercicios/
-    ├── 01_criar_colecao.py        # Conecta no Qdrant e cria a coleção
-    ├── 02_carregar_documentos.py  # Ingestão: PDF -> chunks -> embeddings -> Qdrant
-    ├── 03_busca_semantica.py      # Queries (busca vetorial com top-k)
-    └── roteiro_experimentos.md    # Roteiro de experimentos para preencher
+    ├── 01_criar_colecao.py         # Conecta no Qdrant e cria a coleção
+    ├── 02_carregar_documentos.py   # Ingestão: PDF -> chunks -> embeddings -> Qdrant
+    ├── 03_busca_semantica.py       # Queries (busca vetorial com top-k)
+    └── roteiro_experimentos.md     # Roteiro de experimentos para preencher
 ```
 
 ## Começando

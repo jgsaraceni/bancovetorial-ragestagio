@@ -30,8 +30,8 @@ A forma mais simples é criar um **Stack** no Portainer a partir do
 3. Em **Build method**, escolha **Repository**.
 4. Informe o repositório: `https://github.com/jgsaraceni/bancovetorial-ragestagio`
    (e a branch, se necessário, ex.: `main`).
-5. Em **Repository path**, informe `infra`.
-   O Portainer vai ler o arquivo `infra/docker-compose.yml`.
+5. Deixe **Repository path** **vazio**.
+   O Portainer vai ler o arquivo `docker-compose.yml` na raiz do repositório.
 6. Clique em **Deploy the stack**.
 
 ### Colando o conteúdo manualmente
@@ -39,7 +39,7 @@ A forma mais simples é criar um **Stack** no Portainer a partir do
 1. No Portainer, acesse **Stacks → Add stack**.
 2. Em **Name**, informe: `qdrant-ragestagio`.
 3. Em **Build method**, escolha **Web editor**.
-4. Cole o conteúdo do arquivo `infra/docker-compose.yml`:
+4. Cole o conteúdo do arquivo `docker-compose.yml` (na raiz do repositório):
 
 ```yaml
 services:
