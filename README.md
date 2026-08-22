@@ -16,6 +16,7 @@ bancovetorial-ragestagio/
 ├── README.md
 ├── .gitignore
 ├── requirements.txt
+├── requirements-cpu.txt            # instala torch CPU-only (sem CUDA, mais leve)
 ├── docker-compose.yml              # Composição do Qdrant (porta 2222) — usada pelo Portainer
 ├── infra/
 │   ├── portainer-qdrant.md         # Passo a passo: criar o container no Portainer (OCI)
@@ -33,7 +34,11 @@ bancovetorial-ragestagio/
 
 1. Siga o passo a passo de infraestrutura em [`infra/portainer-qdrant.md`](infra/portainer-qdrant.md).
 2. Configure a porta 2222 na OCI conforme [`infra/firewall-oci.md`](infra/firewall-oci.md).
-3. Instale as dependências: `pip install -r requirements.txt`
+3. Instale as dependências. Prefira a versão CPU (mais leve, sem CUDA):
+   ```bash
+   pip install -r requirements-cpu.txt
+   ```
+   Use `pip install -r requirements.txt` apenas se quiser o torch com CUDA.
 4. Crie o arquivo `.env` (fora do git) com `QDRANT_URL` e a mesma `QDRANT_API_KEY` definida na stack do Portainer.
 5. Coloque os PDFs em `data/documentos/`.
 6. Execute os exercícios em ordem:
