@@ -14,7 +14,6 @@ transformam em chunks + embeddings e realizam buscas semânticas (queries) no ba
 ```
 bancovetorial-ragestagio/
 ├── README.md
-├── .env.example
 ├── .gitignore
 ├── requirements.txt
 ├── docker-compose.yml              # Composição do Qdrant (porta 2222) — usada pelo Portainer
@@ -35,7 +34,7 @@ bancovetorial-ragestagio/
 1. Siga o passo a passo de infraestrutura em [`infra/portainer-qdrant.md`](infra/portainer-qdrant.md).
 2. Configure a porta 2222 na OCI conforme [`infra/firewall-oci.md`](infra/firewall-oci.md).
 3. Instale as dependências: `pip install -r requirements.txt`
-4. Copie `.env.example` para `.env` e ajuste o endereço do Qdrant.
+4. Crie o arquivo `.env` (fora do git) com `QDRANT_URL` e a mesma `QDRANT_API_KEY` definida na stack do Portainer.
 5. Coloque os PDFs em `data/documentos/`.
 6. Execute os exercícios em ordem:
    - `python exercicios/01_criar_colecao.py`
