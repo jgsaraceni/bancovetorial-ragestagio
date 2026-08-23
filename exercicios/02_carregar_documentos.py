@@ -34,8 +34,9 @@ COLECAO = os.getenv("COLECAO", "documentos-ragestagio")
 PASTA_DOCUMENTOS = Path(__file__).resolve().parent.parent / "data/documentos"
 
 # Tamanho (caracteres) e sobreposição de cada chunk.
-TAMANHO_CHUNK = 800
-SOBREPOSICAO = 150
+# A sobreposição deve ser SEMPRE menor que o tamanho.
+TAMANHO_CHUNK = 1000
+SOBREPOSICAO = 200
 
 MODELO = (
     "sentence-transformers/"
