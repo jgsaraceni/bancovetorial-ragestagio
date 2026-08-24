@@ -249,27 +249,17 @@ este corpus ficou em **top-k entre 3 e 5**.
 
 Foram observados **problemas nas duas pontas**:
 
-- **Na busca (consulta):** os maiores problemas vieram de perguntas
-  sub-especificadas (Exp. 1 e Exp. 4). A pergunta "frequência mínima" sem
-  escopo e "estágio obrigatório" sem distinção de regime não têm, sozinhas,
-  como gerar recuperação precisa.
-- **No chunking:** o corte por caracteres gera trechos começando no meio de
-  palavras/frases, e o chunk de 1000 aumenta a mistura de assuntos.
+- **Na busca (consulta):** os maiores problemas vieram de perguntas sub-especificadas (Exp. 1 e Exp. 4). A pergunta "frequência mínima" sem escopo e "estágio obrigatório" sem distinção de regime não têm, sozinhas, como gerar recuperação precisa.
+- **No chunking:** o corte por caracteres gera trechos começando no meio de palavras/frases, e o chunk de 1000 aumenta a mistura de assuntos.
 - **Na indexação:** a ingestão em si foi correta (fonte/página corretas,
-  IDs estáveis via UUID, sem duplicação).
-- **No banco:** sem problemas — similaridade de cosseno respondeu conforme o
-  esperado.
+  IDs estáveis via UUID, sem duplicação). A escolha de separar por página, combinando com chunks maiores, as vezes produz chunks muito pequenos ao final de cada página e prejudica a construção de conteúdo com bom contexto.
+- **No banco:** sem problemas — similaridade de cosseno respondeu conforme o esperado.
 
 ---
 
 ## 10. Recomendações
 
-1. **Melhorar as consultas** (maior ganho): acrescentar escopo às perguntas e
-   usar **filtros por payload** (ex.: filtrar `fonte` ou um campo `tipo`
-   = regulamento/ppc/ficha) para evitar resultados cruzados entre documentos.
-2. **Manter chunks em torno de 800–1000** com sobreposição de 15–20%; a
-   diferença de qualidade entre eles foi pequena.
+1. **Melhorar as consultas** (maior ganho): acrescentar escopo às perguntas e usar **filtros por payload** (ex.: filtrar `fonte` ou um campo `tipo` = regulamento/ppc/ficha) para evitar resultados cruzados entre documentos.
+2. **Manter chunks em torno de 800–1000** com sobreposição de 15–20%; a diferença de qualidade entre eles foi pequena.
 3. **Usar top-k = 3 a 5** para equilibrar cobertura e ruído neste corpus.
-4. **Próximo passo opcional:** testar um modelo de embeddings mais forte
-   (ex.: `multilingual-e5-large`, 1024 dims) para medir ganho real de
-   relevância — lembrando que a dimensão sozinha não garante qualidade.
+4. **Próximo passo opcional:** testar um modelo de embeddings mais forte (ex.: `multilingual-e5-large`, 1024 dims) para medir ganho real de relevância — lembrando que a dimensão sozinha não garante qualidade.
